@@ -1,0 +1,28 @@
+{
+  "name": "kamai-primer-paso-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kamai — capacidad 'Primer paso con ahorro medido' (implementación parcial: backend)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "start:mongo": "node src/server.js --mongo-memory",
+    "start:recorridos": "node src/server.js --demo",
+    "test": "vitest run",
+    "test:verbose": "vitest run --reporter=verbose",
+    "e2e": "node scripts/e2e.mjs"
+  },
+  "dependencies": {
+    "express": "4.21.2",
+    "mongodb": "6.12.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "10.1.3",
+    "supertest": "7.0.0",
+    "vitest": "2.1.8"
+  }
+}
