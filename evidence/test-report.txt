@@ -1,0 +1,176 @@
+
+ RUN  v2.1.8 C:/Users/Hp/Desktop/kamai-primer-paso/api
+
+ ✓ test/integrations.test.js > outbox de correos > encola una sola vez por negocio + plantilla + referencia
+ ✓ test/integrations.test.js > outbox de correos > no escribe a direcciones que rebotaron
+ ✓ test/integrations.test.js > outbox de correos > primer fallo: queda pending con attempts=1 y reintento a 1 minuto
+ ✓ test/integrations.test.js > outbox de correos > no reintenta antes de tiempo
+ ✓ test/integrations.test.js > outbox de correos > después de 5 intentos fallidos queda failed
+ ✓ test/integrations.test.js > subtareas con respaldo > timeout => pasos estáticos reintentables
+ ✓ test/integrations.test.js > subtareas con respaldo > 402 => sin cupo, no reintentable
+ ✓ test/savings.test.js > normalización de facturas (anexo) > cuenta los días del periodo de forma inclusiva
+ ✓ test/savings.test.js > normalización de facturas (anexo) > reproduce el total de la factura de febrero: 1.690 kWh × 0,78 = S/ 1.318
+ ✓ test/savings.test.js > el "ahorraste S/ 117" de febrero > la resta simple da ~S/ 117, que es lo que Kamai mostró
+ ✓ test/savings.test.js > el "ahorraste S/ 117" de febrero > pero por día febrero consumió MÁS que enero (+1,7 %)
+ ✓ test/savings.test.js > el "ahorraste S/ 117" de febrero > y se marca como ahorro engañoso
+ ✓ test/savings.test.js > measureSavings — "todavía no podemos saberlo" > sin facturas suficientes de antes: INSUFFICIENT_BASELINE
+ ✓ test/savings.test.js > measureSavings — "todavía no podemos saberlo" > negocio nuevo sin ninguna factura: INSUFFICIENT_BASELINE y pide 3
+ ✓ test/savings.test.js > measureSavings — "todavía no podemos saberlo" > con línea base pero sin factura completa posterior: WAITING_POST_DATA
+ ✓ test/savings.test.js > measureSavings — "todavía no podemos saberlo" > la variación natural de Inés es ~2,6 % por mes
+ ✓ test/savings.test.js > measureSavings — "todavía no podemos saberlo" > una baja de 4,5 % con UNA factura posterior queda dentro del ruido: INCONCLUSIVE
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > con dos facturas posteriores el ahorro supera el ruido: MEASURED
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > mide en kWh por día (−5,7 %), no en soles
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > valoriza a la tarifa vigente (0,86): ~S/ 88 al mes, con rango
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > separa el efecto de la tarifa: la resta en soles casi no muestra ahorro
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > declara que no corrige por temporada con menos de 12 meses
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > con el mismo consumo por día pero tarifa más alta, NO reporta ahorro ni pérdida
+ ✓ test/savings.test.js > measureSavings — ahorro medido y corrección por tarifa > si el consumo sube claramente: INCREASED (no lo esconde)
+ ✓ test/savings.test.js > edición y borrado: recálculo sin doble conteo > es determinista: recalcular N veces da exactamente lo mismo
+ ✓ test/savings.test.js > edición y borrado: recálculo sin doble conteo > el orden en que llegan las facturas no cambia el resultado ni el hash
+ ✓ test/savings.test.js > edición y borrado: recálculo sin doble conteo > editar una factura cambia el hash y el resultado
+ ✓ test/savings.test.js > edición y borrado: recálculo sin doble conteo > borrar la última factura posterior vuelve a "todavía no podemos saberlo"
+ ✓ test/savings.test.js > edición y borrado: recálculo sin doble conteo > inputsHash depende de las fechas del plan
+ ✓ test/savings.test.js > lo que guarda la prueba de junio (control) > junio vs enero: menos kWh por día pero más caro por la tarifa
+ ✓ test/recommendation.test.js > recomendación para Inés > recomienda burletes y descongelamiento de refrigeradoras (eco_118)
+ ✓ test/recommendation.test.js > recomendación para Inés > deja "hornear por tandas" como alternativa y como siguiente paso (ataca el horno)
+ ✓ test/recommendation.test.js > recomendación para Inés > excluye lo que no entra en S/ 1.200 o en 4 h/semana, y el aislamiento que ya está en plan
+ ✓ test/recommendation.test.js > recomendación para Inés > detecta que el aislamiento lleva 7 semanas trabado y sugiere pausarlo
+ ✓ test/recommendation.test.js > recomendación para Inés > tiene línea base suficiente (6 facturas): no pide más
+ ✓ test/recommendation.test.js > recomendación para Inés > las razones son códigos trazables con versión de reglas
+ ✓ test/recommendation.test.js > recomendación para Inés > es determinista: mismo input => misma recomendación y mismo hash
+ ✓ test/recommendation.test.js > explicación para Inés (sin LLM, con privacidad) > explica en lenguaje simple por qué
+ ✓ test/recommendation.test.js > explicación para Inés (sin LLM, con privacidad) > muestra la tasa de completitud (9 negocios >= 5) pero NO el % de ahorro (solo 4 midieron)
+ ✓ test/recommendation.test.js > explicación para Inés (sin LLM, con privacidad) > incluye la nota de plan trabado y el siguiente paso
+ ✓ test/recommendation.test.js > casos borde de la recomendación > negocio nuevo sin facturas: recomienda igual, pero pide 3 facturas antes de empezar
+ ✓ test/recommendation.test.js > casos borde de la recomendación > sin equipos declarados no inventa: la coincidencia de carga es neutra (0,5)
+ ✓ test/recommendation.test.js > casos borde de la recomendación > un negocio que no es panadería no recibe ecoinnovaciones exclusivas de panadería
+ ✓ test/recommendation.test.js > casos borde de la recomendación > con más presupuesto y tiempo, el aislamiento deja de excluirse por presupuesto
+ ✓ test/recommendation.test.js > pocos casos: suavizado y k-anonimato > 1 de 2 no pesa como 7 de 9
+ ✓ test/recommendation.test.js > pocos casos: suavizado y k-anonimato > el -18 % del aislamiento (1 caso) no se publica
+ ✓ test/recommendation.test.js > pocos casos: suavizado y k-anonimato > el -4 % de LED (5 casos con facturas) sí se publica
+ ✓ test/recommendation.test.js > pocos casos: suavizado y k-anonimato > el reporte a aliados no publica promedios con menos de 5 negocios medidos
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > GET /health
+stderr | test/api.e2e.test.js > API e2e — repo memoria > surface inválido => 400
+[400] GET /businesses/biz_ines/recommendations/first-step → BAD_SURFACE (surface)
+
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > los 4 lugares de Kamai reciben LA MISMA recomendación
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > surface inválido => 400
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > el listado de facturas desarma el "ahorraste S/ 117" de febrero
+stderr | test/api.e2e.test.js > API e2e — repo memoria > perfil público del negocio (sin email) y tachar pasos del plan
+[400] PATCH /plans/plan_mvfcza6v1/steps/9 → BAD_STEP
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > fecha de término antes de empezar: explica con fechas y marca el campo
+[400] POST /plans/plan_mvfcza6v1/complete → COMPLETED_BEFORE_START (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > fecha de término en el futuro: lo dice y sugiere qué hacer
+[400] POST /plans/plan_mvfcza6v1/complete → COMPLETED_IN_FUTURE (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > fecha vacía o mal escrita: mensaje del campo, no jerga técnica
+[400] POST /plans/plan_mvfcza6v1/complete → VALIDATION (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > tocar dos veces "Listo" con la misma fecha no es un error; con otra fecha, se explica
+[409] POST /plans/plan_mvfcza6v1/complete → PLAN_ALREADY_COMPLETED
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > factura superpuesta => 409 que nombra la factura con la que choca
+[409] POST /businesses/biz_ines/bills → OVERLAPPING_PERIOD (billingStartDate)
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > factura inválida => 400 con un mensaje simple por cada campo
+[400] POST /businesses/biz_ines/bills → VALIDATION (kwhConsumed)
+
+stderr | test/api.e2e.test.js > API e2e — repo memoria > factura inválida => 400 con un mensaje simple por cada campo
+[400] POST /businesses/biz_ines/bills → VALIDATION (billingEndDate)
+
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > Inés acepta el primer paso: se crea el plan con startedAt y el id de la recomendación
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > una vez aceptado, "su primer paso" es el plan en curso y lo recomendado pasa a ser el siguiente
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > perfil público del negocio (sin email) y tachar pasos del plan
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > si la IA no responde, ve los pasos de la guía (200, no error)
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > fecha de término antes de empezar: explica con fechas y marca el campo
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > fecha de término en el futuro: lo dice y sugiere qué hacer
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > fecha vacía o mal escrita: mensaje del campo, no jerga técnica
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > completa el 10/7: todavía no podemos saberlo (falta factura posterior)
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > tocar dos veces "Listo" con la misma fecha no es un error; con otra fecha, se explica
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > factura superpuesta => 409 que nombra la factura con la que choca
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > factura sin foto se acepta con evidence "none" (cuenta igual para la dueña)
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > factura inválida => 400 con un mensaje simple por cada campo
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > julio (mixto) + agosto: INCONCLUSIVE, con explicación honesta
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > septiembre: MEASURED (~S/ 88/mes) y se encola UN correo
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > recalcular varias veces no duplica snapshots ni correos
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > el correo falla una vez, se reintenta con backoff y sale una sola vez
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > si edita septiembre, se recalcula desde cero y se le avisa del cambio (sin cifras contradictorias)
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > cada factura trae su CO₂ equivalente (contrato del anexo) y el ahorro, el CO₂ evitado
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > foto ilegible: la factura cuenta igual, se marca y al cambiar la foto se vuelve a revisar
+stderr | test/api.e2e.test.js > API e2e — repo memoria > negocio inexistente => 404
+[404] GET /businesses/nope/recommendations/first-step → NOT_FOUND
+
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > si borra agosto y septiembre, vuelve a "todavía no podemos saberlo"
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > reporte a aliados: agregado con k>=5, sin nombres ni emails
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > aliados: embudo contra "de cada 10, 3 completan y 1 deja facturas", meta de 90 días, CO₂ y declarado vs medido
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > negocio nuevo sin facturas: recomendación igual, pidiendo 3 facturas antes de empezar
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > marcar como visto una versión vieja no la marca (STALE)
+ ✓ test/api.e2e.test.js > API e2e — repo memoria > negocio inexistente => 404
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > GET /health
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > surface inválido => 400
+[400] GET /businesses/biz_ines/recommendations/first-step → BAD_SURFACE (surface)
+
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > los 4 lugares de Kamai reciben LA MISMA recomendación
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > surface inválido => 400
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > el listado de facturas desarma el "ahorraste S/ 117" de febrero
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > Inés acepta el primer paso: se crea el plan con startedAt y el id de la recomendación
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > una vez aceptado, "su primer paso" es el plan en curso y lo recomendado pasa a ser el siguiente
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > perfil público del negocio (sin email) y tachar pasos del plan
+[400] PATCH /plans/plan_aeb0ea9e/steps/9 → BAD_STEP
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > fecha de término antes de empezar: explica con fechas y marca el campo
+[400] POST /plans/plan_aeb0ea9e/complete → COMPLETED_BEFORE_START (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > fecha de término en el futuro: lo dice y sugiere qué hacer
+[400] POST /plans/plan_aeb0ea9e/complete → COMPLETED_IN_FUTURE (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > fecha vacía o mal escrita: mensaje del campo, no jerga técnica
+[400] POST /plans/plan_aeb0ea9e/complete → VALIDATION (completedAt)
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > tocar dos veces "Listo" con la misma fecha no es un error; con otra fecha, se explica
+[409] POST /plans/plan_aeb0ea9e/complete → PLAN_ALREADY_COMPLETED
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > factura superpuesta => 409 que nombra la factura con la que choca
+[409] POST /businesses/biz_ines/bills → OVERLAPPING_PERIOD (billingStartDate)
+
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > perfil público del negocio (sin email) y tachar pasos del plan
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > si la IA no responde, ve los pasos de la guía (200, no error)
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > fecha de término antes de empezar: explica con fechas y marca el campo
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > fecha de término en el futuro: lo dice y sugiere qué hacer
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > fecha vacía o mal escrita: mensaje del campo, no jerga técnica
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > completa el 10/7: todavía no podemos saberlo (falta factura posterior)
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > tocar dos veces "Listo" con la misma fecha no es un error; con otra fecha, se explica
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > factura superpuesta => 409 que nombra la factura con la que choca
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > factura inválida => 400 con un mensaje simple por cada campo
+[400] POST /businesses/biz_ines/bills → VALIDATION (kwhConsumed)
+
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > factura inválida => 400 con un mensaje simple por cada campo
+[400] POST /businesses/biz_ines/bills → VALIDATION (billingEndDate)
+
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > factura sin foto se acepta con evidence "none" (cuenta igual para la dueña)
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > factura inválida => 400 con un mensaje simple por cada campo
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > julio (mixto) + agosto: INCONCLUSIVE, con explicación honesta
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > septiembre: MEASURED (~S/ 88/mes) y se encola UN correo
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > recalcular varias veces no duplica snapshots ni correos
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > el correo falla una vez, se reintenta con backoff y sale una sola vez
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > si edita septiembre, se recalcula desde cero y se le avisa del cambio (sin cifras contradictorias)
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > cada factura trae su CO₂ equivalente (contrato del anexo) y el ahorro, el CO₂ evitado
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > foto ilegible: la factura cuenta igual, se marca y al cambiar la foto se vuelve a revisar
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > si borra agosto y septiembre, vuelve a "todavía no podemos saberlo"
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > reporte a aliados: agregado con k>=5, sin nombres ni emails
+stderr | test/api.e2e.test.js > API e2e — repo MongoDB > negocio inexistente => 404
+[404] GET /businesses/nope/recommendations/first-step → NOT_FOUND
+
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > aliados: embudo contra "de cada 10, 3 completan y 1 deja facturas", meta de 90 días, CO₂ y declarado vs medido
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > negocio nuevo sin facturas: recomendación igual, pidiendo 3 facturas antes de empezar
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > marcar como visto una versión vieja no la marca (STALE)
+ ✓ test/api.e2e.test.js > API e2e — repo MongoDB > negocio inexistente => 404
+ ✓ test/api.e2e.test.js > API demo — correo que falla > falla una vez, se reintenta al instante y sale una sola vez
+
+ Test Files  4 passed (4)
+      Tests  107 passed (107)
+   Start at  11:37:35
+   Duration  2.55s (transform 210ms, setup 0ms, collect 688ms, tests 1.76s, environment 1ms, prepare 585ms)
+

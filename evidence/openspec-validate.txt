@@ -1,0 +1,2 @@
+$ npx @fission-ai/openspec validate add-primer-paso-ahorro-medido --strict
+Change 'add-primer-paso-ahorro-medido' is valid
