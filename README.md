@@ -4,6 +4,14 @@ Mi solución para la prueba técnica full stack de Kamai. La idea es que la plat
 
 Si tienen poco tiempo, el [resumen](RESUMEN.md) entra en una página.
 
+## Video
+
+En 5 minutos cuento las decisiones y muestro la app funcionando.
+
+[![Video de la entrega, 5 minutos](evidence/capturas/00-video.jpg)](https://drive.google.com/file/d/1f7aKyEfKCu9Hhjzn0oXxV6MASz877dbm/view?usp=sharing)
+
+[Ver el video en Google Drive](https://drive.google.com/file/d/1f7aKyEfKCu9Hhjzn0oXxV6MASz877dbm/view?usp=sharing)
+
 Todos los datos son los del enunciado (ficticios). Las facturas de julio a septiembre de Inés y las otras 6 panaderías las inventé yo para poder mostrar la medición funcionando.
 
 ## Qué hay en el repo
